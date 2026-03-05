@@ -1,6 +1,12 @@
 __pycache__/
 *.pyc
-*.csv
-*.png
 .ipynb_checkpoints
+*.csv
+data/raw/*.csv
+data/processed/*.csv
+src/models/*.pkl
+src/models/*.h5
+!results/*.pkl
+!results/*.json
+!results/*.txt
 .DS_Store
