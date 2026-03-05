@@ -1,0 +1,31 @@
+{
+  "method": "Weighted Average by AUC",
+  "weights": {
+    "random_forest": 0.3682146873526247,
+    "lstm": 0.34094722299478825,
+    "isolation_forest": 0.2908380896525872
+  },
+  "baseline": {
+    "model": "Random Forest",
+    "f1": 0.6598639455782312,
+    "auc": 0.9417827615735685
+  },
+  "individual_models": {
+    "random_forest": {
+      "f1": 0.6598639455782312,
+      "auc": 0.9417827615735685
+    },
+    "lstm": {
+      "f1": 0.49318181818181817,
+      "auc": 0.8720407638584168
+    },
+    "isolation_forest": {
+      "f1": 0.41114982578397213,
+      "auc": 0.743876625924716
+    }
+  },
+  "expected_performance": {
+    "f1": 0.6928571428571428,
+    "auc": 0.9512005891893043
+  }
+}
