@@ -1,0 +1,10 @@
+DAY 1: RANDOM FOREST BASELINE
+==================================================
+
+F1-Score: 0.6599
+ROC-AUC:  0.9418
+
+Model: Random Forest
+Features: 16
+Train samples: 8,484
+Test samples: 2,122
