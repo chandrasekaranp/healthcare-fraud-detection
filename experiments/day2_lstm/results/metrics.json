@@ -1,0 +1,25 @@
+{
+  "day": 2,
+  "model": "LSTM (Deep NN)",
+  "f1_score": 0.5079754601226993,
+  "roc_auc": 0.8672816297811223,
+  "architecture": {
+    "layers": [
+      "Dense(64)",
+      "Dense(32)",
+      "Dense(16)",
+      "Dense(1)"
+    ],
+    "activation": "relu/sigmoid",
+    "dropout": [
+      0.3,
+      0.3,
+      0.2
+    ]
+  },
+  "training": {
+    "epochs": 10,
+    "batch_size": 32,
+    "optimizer": "adam"
+  }
+}

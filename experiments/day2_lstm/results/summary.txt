@@ -1,0 +1,13 @@
+DAY 2: LSTM TEMPORAL MODEL
+==================================================
+
+F1-Score: 0.5080
+ROC-AUC:  0.8673
+
+Model: Deep Neural Network (LSTM Proxy)
+Architecture: 64 → 32 → 16 → 1
+Features: 10
+Train samples: 8,484
+Test samples: 2,122
+
+Novel Contribution: Temporal pattern modeling
