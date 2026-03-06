@@ -1,0 +1,17 @@
+{
+  "features": [
+    "ClaimAmount",
+    "ReimbursementRatio",
+    "DeductibleRatio",
+    "ClaimVelocity",
+    "OverpaymentFlag",
+    "RoundNumberFlag",
+    "WeekendClaim",
+    "Provider_AvgClaim",
+    "Provider_CV",
+    "Provider_FraudRate",
+    "Bene_ProviderShopping",
+    "DeviationFromAvg",
+    "ClaimDuration"
+  ]
+}

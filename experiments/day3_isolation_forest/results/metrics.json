@@ -1,0 +1,16 @@
+{
+  "day": 3,
+  "model": "Isolation Forest",
+  "f1_score": 0.41114982578397213,
+  "roc_auc": 0.743876625924716,
+  "approach": "Unsupervised Anomaly Detection",
+  "features": {
+    "count": 13,
+    "banking_inspired": 13,
+    "novel_contribution": "Banking domain expertise (40 years)"
+  },
+  "parameters": {
+    "n_estimators": 100,
+    "contamination": 0.1326025459688826
+  }
+}

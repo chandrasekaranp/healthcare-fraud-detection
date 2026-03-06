@@ -1,0 +1,20 @@
+DAY 3: ISOLATION FOREST - BANKING FEATURES
+==================================================
+
+F1-Score: 0.4111
+ROC-AUC:  0.7439
+
+Model: Isolation Forest (Unsupervised)
+Banking Features: 13
+Contamination: 0.133
+
+Novel Contribution:
+  - Banking domain expertise (40 years)
+  - Financial fraud indicators
+  - Cross-domain knowledge transfer
+
+Top Banking Features:
+  1. Reimbursement Ratio (credit utilization)
+  2. Claim Velocity (transaction velocity)
+  3. Overpayment Flag (overdraft)
+  4. Provider Shopping (card hopping)
