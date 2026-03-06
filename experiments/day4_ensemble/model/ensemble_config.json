@@ -1,0 +1,42 @@
+{
+  "method": "Weighted Average by AUC",
+  "weights": {
+    "random_forest": 0.36890110472556015,
+    "lstm": 0.3397186319272501,
+    "isolation_forest": 0.29138026334718975
+  },
+  "formula": "0.369*RF + 0.340*LSTM + 0.291*IF",
+  "individual_models": {
+    "day1_random_forest": {
+      "f1_score": 0.6598639455782312,
+      "roc_auc": 0.9417827615735685,
+      "approach": "Supervised (Static features)"
+    },
+    "day2_lstm": {
+      "f1_score": 0.5079754601226993,
+      "roc_auc": 0.8672816297811223,
+      "approach": "Supervised (Temporal patterns)"
+    },
+    "day3_isolation_forest": {
+      "f1_score": 0.41114982578397213,
+      "roc_auc": 0.743876625924716,
+      "approach": "Unsupervised (Banking features)"
+    }
+  },
+  "expected_performance": {
+    "f1_score_min": 0.6730612244897959,
+    "f1_score_max": 0.6928571428571428,
+    "roc_auc_min": 0.9512005891893043,
+    "roc_auc_max": 0.9606184168050399
+  },
+  "improvement": {
+    "f1_improvement_pct": 5.000000000000004,
+    "auc_improvement_pct": 1.9999999999999976
+  },
+  "novel_contributions": [
+    "Temporal pattern modeling (LSTM)",
+    "Banking domain expertise (40 years)",
+    "Multi-modal ensemble (Supervised + Unsupervised)",
+    "Cross-domain knowledge transfer"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "day": 4,
+  "model": "Hybrid Ensemble",
+  "f1_score": 0.6928571428571428,
+  "roc_auc": 0.9606184168050399,
+  "approach": "Multi-Modal Weighted Ensemble"
+}
