@@ -1,0 +1,24 @@
+{
+  "day": 6,
+  "deployment_type": "REST API + Web Frontend",
+  "technologies": {
+    "backend": "Flask (Python)",
+    "frontend": "HTML/JavaScript",
+    "containerization": "Docker",
+    "api_framework": "Flask-CORS"
+  },
+  "endpoints": {
+    "api_url": "http://localhost:5000",
+    "frontend_url": "http://localhost:8080",
+    "health_check": "/health",
+    "predict": "/predict",
+    "batch_predict": "/batch_predict",
+    "models_info": "/models/info"
+  },
+  "deployment_options": [
+    "Local (Python)",
+    "Docker Compose",
+    "Cloud (AWS/GCP/Azure)",
+    "Kubernetes"
+  ]
+}

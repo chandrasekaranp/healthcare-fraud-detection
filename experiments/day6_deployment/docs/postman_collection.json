@@ -1,0 +1,40 @@
+{
+  "info": {
+    "name": "Healthcare Fraud Detection API",
+    "description": "API for healthcare fraud detection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/health"
+      }
+    },
+    {
+      "name": "Predict Fraud",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5000/predict",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ClaimAmount\": 5000, \"InscClaimAmtReimbursed\": 4500, \"DeductibleAmtPaid\": 500, \"ClaimDuration\": 5, \"ClaimMonth\": 3}"
+        }
+      }
+    },
+    {
+      "name": "Models Info",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/models/info"
+      }
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Fraud Detection System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .result.fraud {
+            background: #fee;
+            border: 2px solid #f44336;
+        }
+        
+        .result.normal {
+            background: #efe;
+            border: 2px solid #4caf50;
+        }
+        
+        .result h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .result.fraud h3 {
+            color: #f44336;
+        }
+        
+        .result.normal h3 {
+            color: #4caf50;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .metric-value {
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Healthcare Fraud Detection System</h1>
+            <p>Multi-Modal AI System | RF + LSTM + Isolation Forest</p>
+            <p style="margin-top: 10px; color: #999;">By P. Chandrasekaran | M.Tech AI/ML | BITS Pilani</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2>Enter Claim Details</h2>
+                <form id="claimForm">
+                    <div class="form-group">
+                        <label for="claimAmount">Claim Amount ($)</label>
+                        <input type="number" id="claimAmount" required value="5000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reimbursed">Reimbursed Amount ($)</label>
+                        <input type="number" id="reimbursed" required value="4500">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deductible">Deductible Paid ($)</label>
+                        <input type="number" id="deductible" required value="500">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="duration">Claim Duration (days)</label>
+                        <input type="number" id="duration" required value="5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="month">Claim Month (1-12)</label>
+                        <input type="number" id="month" min="1" max="12" required value="3">
+                    </div>
+                    
+                    <button type="submit" class="btn">Analyze Fraud Risk</button>
+                </form>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 15px;">Analyzing...</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Analysis Results</h2>
+                
+                <div id="noResult" style="text-align: center; padding: 40px; color: #999;">
+                    <p style="font-size: 3em;">📊</p>
+                    <p style="font-size: 1.2em; margin-top: 10px;">Enter claim details and click "Analyze Fraud Risk"</p>
+                </div>
+                
+                <div class="result" id="result">
+                    <h3 id="resultTitle"></h3>
+                    
+                    <div class="metric">
+                        <span class="metric-label">Fraud Probability:</span>
+                        <span class="metric-value" id="probability"></span>
+                    </div>
+                    
+                    <div class="metric">
+                        <span class="metric-label">Confidence:</span>
+                        <span class="metric-value" id="confidence"></span>
+                    </div>
+                    
+                    <div class="metric">
+                        <span class="metric-label">Risk Level:</span>
+                        <span class="metric-value" id="riskLevel"></span>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <h4>Model Used</h4>
+                            <p>Hybrid Ensemble</p>
+                        </div>
+                        <div class="info-box">
+                            <h4>Accuracy</h4>
+                            <p>96.7%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000';  // Change this to your API URL
+        
+        document.getElementById('claimForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('noResult').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            
+            // Get form data
+            const claimData = {
+                ClaimAmount: parseFloat(document.getElementById('claimAmount').value),
+                InscClaimAmtReimbursed: parseFloat(document.getElementById('reimbursed').value),
+                DeductibleAmtPaid: parseFloat(document.getElementById('deductible').value),
+                ClaimDuration: parseInt(document.getElementById('duration').value),
+                ClaimMonth: parseInt(document.getElementById('month').value),
+                ChronicCond_Diabetes: 0,
+                ChronicCond_Heartfailure: 0,
+                Gender: 1
+            };
+            
+            try {
+                // Call API
+                const response = await fetch(`${API_URL}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(claimData)
+                });
+                
+                const result = await response.json();
+                
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+                
+                if (result.status === 'success') {
+                    const prediction = result.predictions.ensemble || result.predictions.random_forest;
+                    
+                    // Show result
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.style.display = 'block';
+                    
+                    const isFraud = prediction.prediction === 'FRAUD';
+                    resultDiv.className = 'result ' + (isFraud ? 'fraud' : 'normal');
+                    
+                    document.getElementById('resultTitle').textContent = 
+                        isFraud ? '⚠️ FRAUD DETECTED' : '✅ NORMAL CLAIM';
+                    document.getElementById('probability').textContent = 
+                        (prediction.fraud_probability * 100).toFixed(1) + '%';
+                    document.getElementById('confidence').textContent = 
+                        (prediction.confidence * 100).toFixed(1) + '%';
+                    document.getElementById('riskLevel').textContent = 
+                        prediction.risk_level || (isFraud ? 'HIGH' : 'LOW');
+                } else {
+                    alert('Error: ' + result.message);
+                    document.getElementById('noResult').style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('noResult').style.display = 'block';
+                alert('Error connecting to API. Make sure the API server is running.');
+            }
+        });
+    </script>
+</body>
+</html>
