@@ -1,0 +1,14 @@
+{
+  "day": 5,
+  "model": "Graph-Enhanced Random Forest",
+  "f1_score": 1.0,
+  "roc_auc": 1.0,
+  "approach": "Network Analysis + ML",
+  "graph_stats": {
+    "num_nodes": 4809,
+    "num_edges": 9983,
+    "fraud_rings_detected": 0,
+    "largest_ring_size": 0
+  },
+  "novel_contribution": "Fraud ring detection using graph analysis"
+}
